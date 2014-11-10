@@ -10,6 +10,3 @@ class Display
     @play_message = "I have generated a beginner sequence with four elements made up of: (r)ed,\n(g)reen, (b)lue, and (y)ellow. Use (q)uit at any time to end the game.\nWhat's your guess?"
   end
 end
-
-display = Display.new
-puts display.instructions

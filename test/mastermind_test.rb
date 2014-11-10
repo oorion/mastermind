@@ -18,4 +18,9 @@ class MastermindTest <Minitest::Test
     mastermind = Mastermind.new
     assert_equal Display, mastermind.display.class
   end
+
+  def test_it_has_a_start_method
+    mastermind = Mastermind.new
+    assert_respond_to mastermind, :start
+  end
 end
