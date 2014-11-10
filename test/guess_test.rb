@@ -1,7 +1,7 @@
 gem 'minitest', '~> 5.2'
 require 'minitest/autorun'
 require 'minitest/pride'
-require_relative '../lib/guess'
+require_relative '../lib/sequence'
 
 class GuessTest <Minitest::Test
 
