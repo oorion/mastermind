@@ -14,13 +14,17 @@ class Game
   end
 
   def play
-    # out_steam.puts display.play_message
-    # until win? || exit?
-    #   break
-    # end
+    out_stream.puts display.play_message
+    until win? || exit?
+      break
+    end
   end
 
   def win?
     guess.player_guess == sequence.solution
+  end
+
+  def exit?
+    guess.player_guess == 'q' || guess.player_guess == 'quit'
   end
 end

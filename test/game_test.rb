@@ -42,4 +42,14 @@ class GameTest <Minitest::Test
       end
     end
   end
+
+  def test_it_has_an_exit_method
+    assert_respond_to @game, :exit?
+  end
+
+  def test_exit_method_exits_if_q_is_entered
+    @game.guess.stub :player_guess, 'q' do
+      assert @game.exit?
+    end
+  end
 end
