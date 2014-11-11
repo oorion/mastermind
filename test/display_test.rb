@@ -4,10 +4,14 @@ require 'minitest/pride'
 require_relative '../lib/display'
 
 class DisplayTest <Minitest::Test
+  def test_display_has_welcome_message
+    display = Display.new
+    assert_equal "Welcome to MASTERMIND", display.welcome
+  end
 
   def test_display_has_initial_message
     display = Display.new
-    assert_equal "Welcome to MASTERMIND\nWould you like to (p)lay, read the (i)nstructions, or (q)uit?", display.initial_message
+    assert_equal "Would you like to (p)lay, read the (i)nstructions, or (q)uit?", display.initial_message
   end
 
   def test_display_invalid_input
