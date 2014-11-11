@@ -34,10 +34,10 @@ class GameTest <Minitest::Test
   end
 
   def test_the_win_method_returns_true_if_guess_equals_solution
-    guess = Guess.new($stdin)
+    guess = Guess.new(nil)
     sequence = Sequence.new
-    guess.stub :player_guess, 'rrgg' do
-      sequence.stub :solution, 'rrgg' do
+    @game.guess.stub :player_guess, 'rrgg' do
+      @game.sequence.stub :solution, 'rrgg' do
         assert @game.win?
       end
     end

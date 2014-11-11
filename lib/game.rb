@@ -14,10 +14,10 @@ class Game
   end
 
   def play
-    out_steam.puts display.play_message
-    until win? || exit?
-      break
-    end
+    # out_steam.puts display.play_message
+    # until win? || exit?
+    #   break
+    # end
   end
 
   def win?
