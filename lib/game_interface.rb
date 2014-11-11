@@ -28,6 +28,7 @@ class GameInterface
     when instructions?
       out_stream.puts display.instructions
     when finished?
+      puts "finished!"
     else
       out_stream.puts display.invalid_input
     end

@@ -34,12 +34,10 @@ class GameTest <Minitest::Test
   end
 
   def test_the_win_method_returns_true_if_guess_equals_solution
-    guess = Guess.new(nil)
+    @game.guess = Guess.new('rrgg')
     sequence = Sequence.new
-    @game.guess.stub :player_guess, 'rrgg' do
-      @game.sequence.stub :solution, 'rrgg' do
-        assert @game.win?
-      end
+    @game.sequence.stub :solution, 'rrgg' do
+      assert @game.win?
     end
   end
 
@@ -48,8 +46,35 @@ class GameTest <Minitest::Test
   end
 
   def test_exit_method_exits_if_q_is_entered
-    @game.guess.stub :player_guess, 'q' do
-      assert @game.exit?
+    @game.guess = Guess.new('q')
+    assert @game.exit?
+  end
+
+  def test_can_process_game_turn
+    assert_respond_to @game, :process_game_turn
+  end
+
+  def test_game_knows_if_guess_is_invalid
+    @game.guess = Guess.new('xxyy')
+    assert @game.guess_invalid?
+  end
+
+  def test_game_knows_if_guess_is_valid
+    @game.guess = Guess.new('rrgg')
+    refute @game.guess_invalid?
+  end
+
+  def test_when_guess_too_short
+    @game.guess = Guess.new('rrg')
+    assert @game.guess_too_short?
     end
+
+  def test_when_guess_too_long
+    @game.guess = Guess.new('rrggg')
+    assert @game.guess_too_long?
+  end
+
+  def test_compute_guess_stats
+
   end
 end

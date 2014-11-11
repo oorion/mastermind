@@ -10,7 +10,7 @@ class Sequence
   def randomizer
     colors.map do
       colors.sample
-    end
+    end.join
   end
 
   def solution
