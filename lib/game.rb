@@ -31,9 +31,13 @@ class Game
       out_stream.puts display.guess_too_short
     when guess.too_long?
       out_stream.puts display.guess_too_long
+    when win?
+      system("say 'Congratulations'")
     else
+      system("say 'You have failed once again.  hahaha'")
       compute_guess_stats
     end
+    puts display.guess_question
   end
 
   def win?

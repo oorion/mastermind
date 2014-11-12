@@ -1,5 +1,5 @@
 class Display
-  attr_reader :welcome, :initial_message, :invalid_input, :instructions, :guess_too_short, :guess_too_long, :play_message, :invalid_guess
+  attr_reader :welcome, :initial_message, :invalid_input, :instructions, :guess_too_short, :guess_too_long, :play_message, :invalid_guess, :guess_question
 
   def initialize
     @welcome = "\nWelcome to MASTERMIND\n\n"
@@ -9,6 +9,7 @@ class Display
     @guess_too_short = "Your guess was too short."
     @guess_too_long = "Your guess was too long."
     @play_message = "\nI have generated a beginner sequence with four elements made up of: (r)ed,\n(g)reen, (b)lue, and (y)ellow. Use (q)uit at any time to end the game.\n\nWhat's your guess?\n"
+    @guess_question = "What's your guess?\n"
     @invalid_guess = "Invalid guess."
   end
 end

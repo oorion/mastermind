@@ -33,6 +33,7 @@ class GameInterface
     else
       out_stream.puts display.invalid_input
     end
+    puts display.guess_question
   end
 
   def play?
