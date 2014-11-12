@@ -53,9 +53,4 @@ class GameTest <Minitest::Test
   def test_can_process_game_turn
     assert_respond_to @game, :process_game_turn
   end
-
-
-  def test_compute_guess_stats
-
-  end
 end

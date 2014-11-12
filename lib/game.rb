@@ -6,7 +6,7 @@ require_relative 'guess_stats'
 class Game
   include GuessStats
 
-  attr_reader :in_stream, :out_stream, :sequence, :display
+  attr_reader :in_stream, :out_stream, :sequence, :display, :beginning_time, :ending_time
   attr_accessor :guess
 
   def initialize(in_stream, out_stream, display)
@@ -18,11 +18,13 @@ class Game
   end
 
   def play
+    @beginning_time = Time.now
     out_stream.puts display.play_message
     until win? || exit?
       @guess = Guess.new(in_stream.gets.strip)
       process_game_turn
     end
+    @ending_time = Time.now
     compute_game_stats
   end
 
@@ -55,5 +57,12 @@ class Game
     number_of_correct_colors = compute_correct_colors(sequence.solution, guess.player_guess)
     number_of_correct_positions = compute_correct_positions(sequence.solution, guess.player_guess)
     out_stream.puts display.guess_stats(guess.player_guess, number_of_correct_colors, number_of_correct_positions)
+  end
+
+  def compute_game_stats
+    minutes = ending_time.min - beginning_time.min
+    seconds = ending_time.sec - beginning_time.sec
+    out_stream.puts "beg: #{beginning_time}\nend: #{ending_time}"
+    out_stream.puts display.win_message(guess.player_guess, minutes, seconds)
   end
 end

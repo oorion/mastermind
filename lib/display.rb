@@ -16,4 +16,8 @@ class Display
   def guess_stats(player_guess, number_of_correct_colors, number_of_correct_positions)
     "'#{player_guess}' has #{number_of_correct_colors} of the correct elements with #{number_of_correct_positions} in the correct positions"
   end
+
+  def win_message(player_guess)
+    @win_message = "You guessed the sequence '#{player_guess}' in 8 guesses over 4 minutes,\n22 seconds.\nDo you want to (p)lay again or (q)uit?"
+  end
 end

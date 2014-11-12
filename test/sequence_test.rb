@@ -11,14 +11,14 @@ class SequenceTest < Minitest::Test
 
   def test_sequence_has_solution
     sequence = Sequence.new
-    sequence.stub :randomizer, 'ggbb' do
+    sequence.stub :solution, 'ggbb' do
       assert_equal 'ggbb', sequence.solution
     end
   end
 
   def test_sequence_has_another_solution
     sequence = Sequence.new
-    sequence.stub :randomizer, 'ygbb' do
+    sequence.stub :solution, 'ygbb' do
       assert_equal 'ygbb', sequence.solution
     end
   end

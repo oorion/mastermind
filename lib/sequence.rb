@@ -1,6 +1,5 @@
 class Sequence
-  attr_reader :colors
-  attr_accessor :solution
+  attr_reader :colors, :solution
 
   def initialize
     @colors = ["r", "g", "b", "y"]
@@ -11,9 +10,5 @@ class Sequence
     colors.map do
       colors.sample
     end.join
-  end
-
-  def solution
-    @solution = randomizer
   end
 end
