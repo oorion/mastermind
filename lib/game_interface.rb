@@ -2,7 +2,10 @@ require_relative 'display'
 require_relative 'game'
 
 class GameInterface
-  attr_reader :command, :display, :in_stream, :out_stream
+  attr_reader :command,
+              :display,
+              :in_stream,
+              :out_stream
 
   def initialize(in_stream, out_stream)
     @command = ''

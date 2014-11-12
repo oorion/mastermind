@@ -6,8 +6,14 @@ require_relative 'guess_stats'
 class Game
   include GuessStats
 
-  attr_reader :in_stream, :out_stream, :sequence, :display, :beginning_time, :ending_time, :guess_count
-  attr_accessor :guess
+  attr_reader :in_stream,
+              :out_stream,
+              :sequence,
+              :display,
+              :beginning_time,
+              :ending_time,
+              :guess_count,
+              :guess
 
   def initialize(in_stream, out_stream, display)
     @in_stream = in_stream
@@ -26,9 +32,10 @@ class Game
       @guess_count += 1
       process_game_turn
     end
-    @ending_time = Time.now
-    compute_game_stats
-    exit! if exit?
+    if win?
+      @ending_time = Time.now
+      compute_game_stats
+    end
   end
 
   def process_game_turn
@@ -41,10 +48,12 @@ class Game
       out_stream.puts display.guess_too_long
     when win?
       system("say 'Congratulations!'")
+    when exit?
+      exit!
     else
       compute_guess_stats
     end
-    puts display.guess_question
+    puts display.guess_question if (!win? || !exit?)
   end
 
   def win?

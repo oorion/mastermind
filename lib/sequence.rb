@@ -1,5 +1,6 @@
 class Sequence
-  attr_reader :colors, :solution
+  attr_reader :colors,
+              :solution
 
   def initialize
     @colors = ["r", "g", "b", "y"]

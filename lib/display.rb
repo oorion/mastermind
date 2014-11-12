@@ -1,5 +1,14 @@
 class Display
-  attr_reader :welcome, :initial_message, :invalid_input, :instructions, :guess_too_short, :guess_too_long, :play_message, :invalid_guess, :guess_question, :win_question
+  attr_reader :welcome,
+              :initial_message,
+              :invalid_input,
+              :instructions,
+              :guess_too_short,
+              :guess_too_long,
+              :play_message,
+              :invalid_guess,
+              :guess_question,
+              :win_question
 
   def initialize
     @welcome          = "\nWelcome to MASTERMIND\n\n"
