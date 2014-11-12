@@ -8,9 +8,8 @@ class Guess
   end
 
   def invalid?
-    valid_colors = possible_colors
-    vc = /[^#{valid_colors}]+/
-    player_guess.match(vc)
+    valid_colors = /[^#{possible_colors}]+/
+    player_guess.match(valid_colors)
   end
 
   def too_short?

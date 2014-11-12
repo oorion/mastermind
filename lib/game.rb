@@ -40,7 +40,7 @@ class Game
     when guess.too_long?
       out_stream.puts display.guess_too_long
     when win?
-      system("say 'Congratulations'")
+      system("say 'Congratulations!'")
     else
       compute_guess_stats
     end
@@ -64,7 +64,7 @@ class Game
   def compute_game_stats
     beginning_seconds = convert_to_seconds(beginning_time)
     ending_seconds = convert_to_seconds(ending_time)
-    minutes = (ending_seconds - beginning_seconds)/60
+    minutes = (ending_seconds - beginning_seconds) / 60
     seconds = (ending_seconds - beginning_seconds) % 60
     out_stream.puts display.win_message(guess.player_guess, guess_count, minutes, seconds)
   end

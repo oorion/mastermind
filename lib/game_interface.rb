@@ -27,7 +27,7 @@ class GameInterface
       game.play
       out_stream.puts display.win_question
     when instructions?
-      out_stream.puts display.instructions
+      out_stream.puts display.instructions.gsub('\t', '')
       out_stream.puts display.win_question
     when finished?
     else

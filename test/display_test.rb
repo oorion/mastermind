@@ -21,7 +21,7 @@ class DisplayTest <Minitest::Test
 
   def test_display_has_instructions
     display = Display.new
-    assert_equal "\n The computer will select a set of four colors at random, duplicates may be possible.\n Your task will be to guess the colors and order in which they are placed.\n You will be prompted to enter your guess using the first letter of the color, for example [rrbg].\n After each guess the correct number of colors guessed, regardless of position, will be displayed.\n The number of correctly placed colors will also be displayed.\n Using that information and multiple guesses you will be able to discover the answer and win!\n\n", display.instructions
+    assert_equal "\nThe computer will select a set of four colors at random, duplicates may be possible.\nYour task will be to guess the colors and order in which they are placed.\nYou will be prompted to enter your guess using the first letter of the color, for example [rrbg].\nAfter each guess the correct number of colors guessed, regardless of position, will be displayed.\nThe number of correctly placed colors will also be displayed.\nUsing that information and multiple guesses you will be able to discover the answer and win!\n", display.instructions
   end
 
   def test_display_has_a_guess_too_short_message
