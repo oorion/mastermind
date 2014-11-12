@@ -4,19 +4,23 @@ require 'minitest/pride'
 require_relative '../lib/guess'
 
 class GuessTest <Minitest::Test
+  def test_guess_knows_if_guess_is_invalid
+    guess = Guess.new('xxyy')
+    assert guess.invalid?
+  end
 
-  # def test_it_has_a_player_guess
-  #   guess = Guess.new($stdin)
-  #   guess.stub :get_user_input, "rbbr" do
-  #     assert_equal ['r', 'b', 'b', 'r'], guess.update_player_guess
-  #   end
-  # end
-  #
-  # def test_it_has_another_player_guess
-  #   guess = Guess.new($stdin)
-  #   guess.stub :get_user_input, "rybr" do
-  #     assert_equal ['r', 'y', 'b', 'r'], guess.update_player_guess
-  #   end
-  # end
+  def test_game_knows_if_guess_is_valid
+    guess = Guess.new('rrgg')
+    refute guess.invalid?
+  end
 
+  def test_when_guess_too_short
+    guess = Guess.new('rrg')
+    assert guess.too_short?
+    end
+
+  def test_when_guess_too_long
+    guess = Guess.new('rrggg')
+    assert guess.too_long?
+  end
 end

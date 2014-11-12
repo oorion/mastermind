@@ -54,25 +54,6 @@ class GameTest <Minitest::Test
     assert_respond_to @game, :process_game_turn
   end
 
-  def test_game_knows_if_guess_is_invalid
-    @game.guess = Guess.new('xxyy')
-    assert @game.guess_invalid?
-  end
-
-  def test_game_knows_if_guess_is_valid
-    @game.guess = Guess.new('rrgg')
-    refute @game.guess_invalid?
-  end
-
-  def test_when_guess_too_short
-    @game.guess = Guess.new('rrg')
-    assert @game.guess_too_short?
-    end
-
-  def test_when_guess_too_long
-    @game.guess = Guess.new('rrggg')
-    assert @game.guess_too_long?
-  end
 
   def test_compute_guess_stats
 

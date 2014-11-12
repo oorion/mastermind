@@ -25,11 +25,11 @@ class Game
 
   def process_game_turn
     case
-    when guess_invalid?
+    when guess.invalid?
       out_stream.puts display.invalid_guess
-    when guess_too_short?
+    when guess.too_short?
       out_stream.puts display.guess_too_short
-    when guess_too_long?
+    when guess.too_long?
       out_stream.puts display.guess_too_long
     else
       compute_guess_stats
@@ -42,20 +42,6 @@ class Game
 
   def exit?
     guess.player_guess == 'q' || guess.player_guess == 'quit'
-  end
-
-  def guess_invalid?
-    valid_colors = sequence.colors.join
-    vc = /[^#{valid_colors}]+/
-    guess.player_guess.match(vc)
-  end
-
-  def guess_too_short?
-    guess.player_guess.length < sequence.colors.length
-  end
-
-  def guess_too_long?
-    guess.player_guess.length > sequence.colors.length
   end
 
   def compute_guess_stats
