@@ -1,5 +1,5 @@
 class Display
-  attr_reader :welcome, :initial_message, :invalid_input, :instructions, :guess_too_short, :guess_too_long, :play_message, :invalid_guess, :guess_question
+  attr_reader :welcome, :initial_message, :invalid_input, :instructions, :guess_too_short, :guess_too_long, :play_message, :invalid_guess, :guess_question, :win_question
 
   def initialize
     @welcome = "\nWelcome to MASTERMIND\n\n"
@@ -11,13 +11,14 @@ class Display
     @play_message = "\nI have generated a beginner sequence with four elements made up of: (r)ed,\n(g)reen, (b)lue, and (y)ellow. Use (q)uit at any time to end the game.\n\nWhat's your guess?\n"
     @guess_question = "What's your guess?\n"
     @invalid_guess = "Invalid guess."
+    @win_question = "\nDo you want to (p)lay again or (q)uit?"
   end
 
   def guess_stats(player_guess, number_of_correct_colors, number_of_correct_positions)
     "'#{player_guess}' has #{number_of_correct_colors} of the correct elements with #{number_of_correct_positions} in the correct positions"
   end
 
-  def win_message(player_guess)
-    @win_message = "You guessed the sequence '#{player_guess}' in 8 guesses over 4 minutes,\n22 seconds.\nDo you want to (p)lay again or (q)uit?"
+  def win_message(player_guess, guess_count, minutes, seconds)
+    @win_message = "Congratulations!  You guessed the sequence '#{player_guess}' in #{guess_count} guesses over #{minutes} #{minutes == 1 ? 'minute' : 'minutes'},\n#{seconds} seconds."
   end
 end

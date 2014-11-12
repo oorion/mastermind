@@ -13,8 +13,8 @@ class GameInterface
 
   def start
     out_stream.puts display.welcome
+    out_stream.puts display.initial_message
     until finished?
-      out_stream.puts display.initial_message
       @command = in_stream.gets.strip
       process_initial_command
     end
@@ -24,12 +24,12 @@ class GameInterface
     case
     when play?
       game = Game.new(in_stream, out_stream, display)
-      # system("say 'One man, one qwerty keyboard.  Welcome toooooooooo,,,MASTERMIND'")
       game.play
+      out_stream.puts display.win_question
     when instructions?
       out_stream.puts display.instructions
+      out_stream.puts display.win_question
     when finished?
-      puts "finished!"
     else
       out_stream.puts display.invalid_input
     end
