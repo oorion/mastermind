@@ -24,6 +24,7 @@ class GameInterface
     case
     when play?
       game = Game.new(in_stream, out_stream, display)
+      system("say 'One man, one qwerty keyboard.  Welcome toooooooooo,,,MASTERMIND'")
       game.play
     when instructions?
       out_stream.puts display.instructions
