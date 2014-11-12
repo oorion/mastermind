@@ -1,8 +1,11 @@
 require_relative 'sequence'
 require_relative 'guess'
 require_relative 'display'
+require_relative 'guess_stats'
 
 class Game
+  include GuessStats
+
   attr_reader :in_stream, :out_stream, :sequence, :display
   attr_accessor :guess
 
@@ -32,9 +35,9 @@ class Game
     when guess.too_long?
       out_stream.puts display.guess_too_long
     when win?
-      system("say 'Congratulations'")
+      # system("say 'Congratulations'")
     else
-      system("say 'You have failed once again.  hahaha'")
+      # system("say 'You have failed once again.  hahaha'")
       compute_guess_stats
     end
     puts display.guess_question
@@ -49,6 +52,8 @@ class Game
   end
 
   def compute_guess_stats
-    puts 'blah'
+    number_of_correct_colors = compute_correct_colors(sequence.solution, guess.player_guess)
+    number_of_correct_positions = compute_correct_positions(sequence.solution, guess.player_guess)
+    out_stream.puts display.guess_stats(guess.player_guess, number_of_correct_colors, number_of_correct_positions)
   end
 end

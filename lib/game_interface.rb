@@ -24,7 +24,7 @@ class GameInterface
     case
     when play?
       game = Game.new(in_stream, out_stream, display)
-      system("say 'One man, one qwerty keyboard.  Welcome toooooooooo,,,MASTERMIND'")
+      # system("say 'One man, one qwerty keyboard.  Welcome toooooooooo,,,MASTERMIND'")
       game.play
     when instructions?
       out_stream.puts display.instructions
@@ -33,7 +33,6 @@ class GameInterface
     else
       out_stream.puts display.invalid_input
     end
-    puts display.guess_question
   end
 
   def play?

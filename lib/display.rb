@@ -12,4 +12,8 @@ class Display
     @guess_question = "What's your guess?\n"
     @invalid_guess = "Invalid guess."
   end
+
+  def guess_stats(player_guess, number_of_correct_colors, number_of_correct_positions)
+    "'#{player_guess}' has #{number_of_correct_colors} of the correct elements with #{number_of_correct_positions} in the correct positions"
+  end
 end
