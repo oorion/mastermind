@@ -48,7 +48,17 @@ _/      _/  _/    _/  _/_/_/        _/      _/_/_/_/  _/    _/  _/      _/  _/_/
 
     @initial_message  = "Would you like to (p)lay, read the (i)nstructions, or (q)uit?"
     @invalid_input    = "Invalid input! Please type (p) for play, (i) for instructions, or (q) for quit."
-    @instructions     = "\nThe computer will select a set of four, five, or seven colors at random, depending upon the difficulty level selected.  Duplicates may be possible.\nYour task will be to guess the colors and order in which they are placed.\nYou will be prompted to enter your guess using the first letter of the color, for example [rrbg].\nAfter each guess the correct number of colors guessed, regardless of position, will be displayed.\nThe number of correctly placed colors will also be displayed.\nUsing that information and multiple guesses you will be able to discover the answer and win!\n"
+    @instructions     =
+
+"\nThe computer will select a set of four, five, or seven colors at random,
+depending upon the difficulty level selected.  Duplicates may be possible.
+Your task will be to guess the colors and order in which they are placed.
+You will be prompted to enter your guess using the first letter of the color,
+for example [rbgy].  After each guess the correct number of colors guessed,
+regardless of position, will be displayed.  The number of correctly placed
+colors will also be displayed.  Using that information and multiple guesses
+you will be able to discover the answer and win!\n"
+
     @guess_too_short  = "Your guess was too short."
     @guess_too_long   = "Your guess was too long."
     @guess_question   = "\nWhat's your guess?\n"
@@ -62,11 +72,16 @@ _/      _/  _/    _/  _/_/_/        _/      _/_/_/_/  _/    _/  _/      _/  _/_/
     colors.chars.each do |color|
       possible_colors_message += COLORS[color] + "\n"
     end
-    @play_message   = "\nI have generated a beginner sequence with #{colors.length} elements made up of:\n\n#{possible_colors_message}\nUse (q)uit at any time to end the game.\n"
+    difficulty_level = {
+      'rgby' => 'beginner',
+      'rgbyw' => 'intermediate',
+      'rgbywcm' => 'expert'
+    }
+    @play_message = "\nI have generated a#{'n' if difficulty_level[colors] == 'intermediate' || difficulty_level[colors] == 'expert'} #{difficulty_level[colors]} sequence with #{colors.length} elements made up of:\n\n#{possible_colors_message}\nUse (q)uit at any time to end the game.\n"
   end
 
-  def guess_stats(player_guess, number_of_correct_colors, number_of_correct_positions)
-    "'#{player_guess.chars.map { |color| GUESS_COLORS[color]}.join}' has #{number_of_correct_colors} of the correct elements with #{number_of_correct_positions} in the correct positions"
+  def guess_stats(player_guess, number_of_correct_colors, number_of_correct_positions, guess_count)
+    "'#{player_guess.chars.map { |color| GUESS_COLORS[color]}.join}' has #{number_of_correct_colors} of the correct elements with #{number_of_correct_positions} in the correct positions.\nYou have taken #{ guess_count } guess#{ "es" if guess_count > 1 }"
   end
 
   def win_message(player_guess, guess_count, minutes, seconds)

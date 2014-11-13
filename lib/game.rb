@@ -2,9 +2,11 @@ require_relative 'sequence'
 require_relative 'guess'
 require_relative 'display'
 require_relative 'guess_stats'
+require_relative 'trash_talking'
 
 class Game
   include GuessStats
+  include TrashTalking
 
   attr_reader :in_stream,
               :out_stream,
@@ -48,16 +50,16 @@ class Game
       out_stream.puts display.invalid_guess
     when guess.too_short?
       out_stream.puts display.guess_too_short
-      system("say -v Kate 'Your guess was too small, like your brain'")
+      trash_talk_too_short
     when guess.too_long?
       out_stream.puts display.guess_too_long
     when win?
-      system("say -v Kate 'Congratulations!'")
+      trash_talk_congratulations
     when exit?
       exit!
     else
       compute_guess_stats
-      system("say -v Kate #{generate_quip}")
+      trash_talk_quip
     end
     out_stream.puts display.guess_question if (!win? || !exit?)
   end
@@ -67,14 +69,14 @@ class Game
   end
 
   def exit?
-    system("say -v Kate 'Your parents were right,,,,you are a quitter'") if guess.player_guess == 'q' || guess.player_guess == 'quit'
+    trash_talk_quit if guess.player_guess == 'q' || guess.player_guess == 'quit'
     guess.player_guess == 'q' || guess.player_guess == 'quit'
   end
 
   def compute_guess_stats
     number_of_correct_colors = compute_correct_colors(sequence.solution, guess.player_guess)
     number_of_correct_positions = compute_correct_positions(sequence.solution, guess.player_guess)
-    out_stream.puts display.guess_stats(guess.player_guess, number_of_correct_colors, number_of_correct_positions)
+    out_stream.puts display.guess_stats(guess.player_guess, number_of_correct_colors, number_of_correct_positions, guess_count)
   end
 
   def compute_game_stats
@@ -87,15 +89,5 @@ class Game
 
   def convert_to_seconds(time)
     time.hour * 60 * 60 + time.min * 60 + time.sec
-  end
-
-  def generate_quip
-    possible_quips = [
-      'You are a good example of why some animals eat their young.',
-      'Are you even trying?',
-      'Why dont you slip into something more comfortable? Like a coma.',
-      'I could say nice things about you, but I would rather tell the truth.'
-    ]
-    possible_quips.sample
   end
 end
