@@ -1,6 +1,6 @@
 module TrashTalking
   def trash_talk_too_short
-    system("say 'Your guess was too small, like your brain'")
+    system("say 'Your guess was too small, like your brain.'")
   end
 
   def trash_talk_congratulations
@@ -8,7 +8,7 @@ module TrashTalking
   end
 
   def trash_talk_quit
-    system("say 'Your parents were right, you are a quitter'")
+    system("say 'Your parents were right, you are a quitter.'")
   end
 
   def trash_talk_quip

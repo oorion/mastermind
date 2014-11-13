@@ -59,7 +59,7 @@ class Game
       exit!
     else
       compute_guess_stats
-      trash_talk_quip
+      trash_talk_quip if guess_count % 3 == 0
     end
     out_stream.puts display.guess_question if (!win? || !exit?)
   end
