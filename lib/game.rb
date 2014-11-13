@@ -28,9 +28,11 @@ class Game
 
   def play
     @beginning_time = Time.now
-    out_stream.puts display.play_message
+    out_stream.puts display.determine_play_message(colors)
+    out_stream.puts display.guess_question
     until win? || exit?
       @guess = Guess.new(in_stream.gets.strip, colors)
+      exit! if exit?
       @guess_count += 1
       process_game_turn
     end
@@ -46,16 +48,18 @@ class Game
       out_stream.puts display.invalid_guess
     when guess.too_short?
       out_stream.puts display.guess_too_short
+      system("say -v Kate 'Your guess was too small, like your brain'")
     when guess.too_long?
       out_stream.puts display.guess_too_long
     when win?
-      system("say 'Congratulations!'")
+      system("say -v Kate 'Congratulations!'")
     when exit?
       exit!
     else
       compute_guess_stats
+      system("say -v Kate #{generate_quip}")
     end
-    puts display.guess_question if (!win? || !exit?)
+    out_stream.puts display.guess_question if (!win? || !exit?)
   end
 
   def win?
@@ -63,13 +67,14 @@ class Game
   end
 
   def exit?
+    system("say -v Kate 'Your parents were right,,,,you are a quitter'") if guess.player_guess == 'q' || guess.player_guess == 'quit'
     guess.player_guess == 'q' || guess.player_guess == 'quit'
   end
 
   def compute_guess_stats
     number_of_correct_colors = compute_correct_colors(sequence.solution, guess.player_guess)
     number_of_correct_positions = compute_correct_positions(sequence.solution, guess.player_guess)
-    out_stream.puts display.guess_stats(guess.player_guess.upcase, number_of_correct_colors, number_of_correct_positions)
+    out_stream.puts display.guess_stats(guess.player_guess, number_of_correct_colors, number_of_correct_positions)
   end
 
   def compute_game_stats
@@ -82,5 +87,15 @@ class Game
 
   def convert_to_seconds(time)
     time.hour * 60 * 60 + time.min * 60 + time.sec
+  end
+
+  def generate_quip
+    possible_quips = [
+      'You are a good example of why some animals eat their young.',
+      'Are you even trying?',
+      'Why dont you slip into something more comfortable? Like a coma.',
+      'I could say nice things about you, but I would rather tell the truth.'
+    ]
+    possible_quips.sample
   end
 end

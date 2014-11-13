@@ -26,16 +26,29 @@ class GameInterface
   def process_initial_command
     case
     when play?
-      game = Game.new(in_stream, out_stream, display, 'rgby')
-      game.play
-      out_stream.puts display.win_question
+      play_game
     when instructions?
-      out_stream.puts display.instructions.gsub('\t', '')
-      out_stream.puts display.win_question
+      display_instructions
     when finished?
     else
-      out_stream.puts display.invalid_input
+      display_invalid_input_message
     end
+  end
+
+  def play_game
+    out_stream.puts display.level
+    @command = in_stream.gets.strip
+    Game.new(in_stream, out_stream, display, selected_level).play
+    out_stream.puts display.win_question
+  end
+
+  def display_instructions
+    out_stream.puts display.instructions
+    out_stream.puts display.win_question
+  end
+
+  def display_invalid_input_message
+    out_stream.puts display.invalid_input
   end
 
   def play?
@@ -48,5 +61,23 @@ class GameInterface
 
   def finished?
     command == 'q' || command == 'quit'
+  end
+
+  private
+
+  def selected_level
+    levels[@command] || default_level
+  end
+
+  def levels
+    @levels ||= {
+      'e' => 'rgby',
+      'i' => 'rgbyw',
+      'h' => 'rgbywcm'
+    }
+  end
+
+  def default_level
+    'rgby'
   end
 end
