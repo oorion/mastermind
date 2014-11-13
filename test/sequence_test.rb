@@ -6,7 +6,7 @@ require_relative '../lib/sequence'
 class SequenceTest < Minitest::Test
   def test_sequence_has_colors
     sequence = Sequence.new
-    assert_equal ['r','g','b','y'], sequence.colors
+    assert_equal 'rgby', sequence.colors
   end
 
   def test_sequence_has_solution

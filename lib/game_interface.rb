@@ -26,7 +26,7 @@ class GameInterface
   def process_initial_command
     case
     when play?
-      game = Game.new(in_stream, out_stream, display)
+      game = Game.new(in_stream, out_stream, display, 'rgby')
       game.play
       out_stream.puts display.win_question
     when instructions?

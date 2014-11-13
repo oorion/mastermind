@@ -4,11 +4,6 @@ require 'minitest/pride'
 require_relative '../lib/display'
 
 class DisplayTest <Minitest::Test
-  def test_display_has_welcome_message
-    display = Display.new
-    assert_equal "\nWelcome to MASTERMIND\n\n", display.welcome
-  end
-
   def test_display_has_initial_message
     display = Display.new
     assert_equal "Would you like to (p)lay, read the (i)nstructions, or (q)uit?", display.initial_message
@@ -36,6 +31,6 @@ class DisplayTest <Minitest::Test
 
   def test_has_a_play_message
     display = Display.new
-    assert_equal "\nI have generated a beginner sequence with four elements made up of: (r)ed,\n(g)reen, (b)lue, and (y)ellow. Use (q)uit at any time to end the game.\n\nWhat's your guess?\n", display.play_message
+    assert_equal "\nI have generated a beginner sequence with four elements made up of: (#{"r".colorize(:red)})ed,\n(#{"g".colorize(:green)})reen, (#{"b".colorize(:blue)})lue, and (#{"y".colorize(:yellow)})ellow. Use (q)uit at any time to end the game.\n\nWhat's your guess?\n", display.play_message
   end
 end

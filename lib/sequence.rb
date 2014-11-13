@@ -2,14 +2,14 @@ class Sequence
   attr_reader :colors,
               :solution
 
-  def initialize
-    @colors = ["r", "g", "b", "y"]
+  def initialize(colors='rgby')
+    @colors = colors
     @solution = randomizer
   end
 
   def randomizer
-    colors.map do
-      colors.sample
+    colors.chars.map do
+      colors.chars.sample
     end.join
   end
 end

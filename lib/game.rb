@@ -13,14 +13,16 @@ class Game
               :beginning_time,
               :ending_time,
               :guess_count,
-              :guess
+              :guess,
+              :colors
 
-  def initialize(in_stream, out_stream, display)
+  def initialize(in_stream, out_stream, display, colors='rgby')
     @in_stream = in_stream
     @out_stream = out_stream
-    @sequence = Sequence.new
-    @guess = Guess.new('')
     @display = display
+    @colors = colors
+    @sequence = Sequence.new(colors)
+    @guess = Guess.new('', colors)
     @guess_count = 0
   end
 
@@ -28,7 +30,7 @@ class Game
     @beginning_time = Time.now
     out_stream.puts display.play_message
     until win? || exit?
-      @guess = Guess.new(in_stream.gets.strip)
+      @guess = Guess.new(in_stream.gets.strip, colors)
       @guess_count += 1
       process_game_turn
     end

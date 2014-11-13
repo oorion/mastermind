@@ -3,7 +3,7 @@ class Guess
               :possible_colors,
               :solution_length
 
-  def initialize(player_guess, colors='rbgy', solution_length=4)
+  def initialize(player_guess, colors='rgby', solution_length=4)
     @player_guess = player_guess
     @possible_colors = colors
     @solution_length = solution_length

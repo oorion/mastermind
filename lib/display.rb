@@ -1,3 +1,5 @@
+require 'colorize'
+
 class Display
   attr_reader :welcome,
               :initial_message,
@@ -11,13 +13,24 @@ class Display
               :win_question
 
   def initialize
-    @welcome          = "\nWelcome to MASTERMIND\n\n"
+    @welcome          = "\nWelcome to...\n" +
+"
+
+    _/      _/    _/_/      _/_/_/  _/_/_/_/_/  _/_/_/_/  _/_/_/    _/      _/  _/_/_/  _/      _/  _/_/_/
+   _/_/  _/_/  _/    _/  _/            _/      _/        _/    _/  _/_/  _/_/    _/    _/_/    _/  _/    _/
+  _/  _/  _/  _/_/_/_/    _/_/        _/      _/_/_/    _/_/_/    _/  _/  _/    _/    _/  _/  _/  _/    _/
+ _/      _/  _/    _/        _/      _/      _/        _/    _/  _/      _/    _/    _/    _/_/  _/    _/
+_/      _/  _/    _/  _/_/_/        _/      _/_/_/_/  _/    _/  _/      _/  _/_/_/  _/      _/  _/_/_/
+
+
+".colorize(:blue)
+
     @initial_message  = "Would you like to (p)lay, read the (i)nstructions, or (q)uit?"
     @invalid_input    = "Invalid input! Please type (p) for play, (i) for instructions, or (q) for quit."
     @instructions     = "\nThe computer will select a set of four colors at random, duplicates may be possible.\nYour task will be to guess the colors and order in which they are placed.\nYou will be prompted to enter your guess using the first letter of the color, for example [rrbg].\nAfter each guess the correct number of colors guessed, regardless of position, will be displayed.\nThe number of correctly placed colors will also be displayed.\nUsing that information and multiple guesses you will be able to discover the answer and win!\n"
     @guess_too_short  = "Your guess was too short."
     @guess_too_long   = "Your guess was too long."
-    @play_message     = "\nI have generated a beginner sequence with four elements made up of: (r)ed,\n(g)reen, (b)lue, and (y)ellow. Use (q)uit at any time to end the game.\n\nWhat's your guess?\n"
+    @play_message     = "\nI have generated a beginner sequence with four elements made up of: (#{"r".colorize(:red)})ed,\n(#{"g".colorize(:green)})reen, (#{"b".colorize(:blue)})lue, and (#{"y".colorize(:yellow)})ellow. Use (q)uit at any time to end the game.\n\nWhat's your guess?\n"
     @guess_question   = "What's your guess?\n"
     @invalid_guess    = "Invalid guess."
     @win_question     = "\nDo you want to (p)lay again or (q)uit?"
